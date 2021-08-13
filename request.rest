@@ -1,0 +1,30 @@
+###
+GET http://localhost:3000/books
+
+###
+GET http://localhost:3000/books/10
+
+
+
+###
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+    "name": "Dracula",
+    "author": "Bram Stoker",
+    "isbn": "9500110822"
+}
+
+###
+PUT http://localhost:3000/books/1
+Content-Type: application/json
+
+{
+    "name":"Estudio en escarlata",
+    "author": "Arthur Conan Doyle",
+    "isbn": "9789871269259"
+}
+
+###
+DELETE http://localhost:3000/books/1
