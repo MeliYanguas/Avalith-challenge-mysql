@@ -12,11 +12,12 @@
     "rules": {
         "no-console":"off",
         "linebreak-style":"off",
-        "indent":"off",
+        // "indent":"off",
         "import/newline-after-import":"off",
         "consistent-return":"off",
         "no-shadow":"off",
-        "no-unused-vars":"off"
+        "no-unused-vars":"off",
+        "camelcase":"off"
 
 
     }
