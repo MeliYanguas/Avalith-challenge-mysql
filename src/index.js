@@ -3,19 +3,20 @@ const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 const routes = require('./routes');
 
+const dbSettings = require('../config.json');
+// {
+//   host: "localhost",
+//   port: 3306,
+//   user: "root",
+//   password: "****",
+//   database: "bookstore"
+// }
+
 const app = express();
 
 // settings
 app.set('port', process.env.PORT || 3000);
 const port = app.get('port');
-
-const dbSettings = {
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: '******',
-    database: 'bookstore',
-};
 
 // middlewares
 app.use(express.json());

@@ -2,7 +2,7 @@
 GET http://localhost:3000/books
 
 ###
-GET http://localhost:3000/books/10
+GET http://localhost:3000/books/2
 
 
 
@@ -11,9 +11,9 @@ POST http://localhost:3000/books
 Content-Type: application/json
 
 {
-    "name": "Dracula",
-    "author": "Bram Stoker",
-    "isbn": "9500110822"
+    "name": "El sabueso de los Baskerville",
+    "author_id": "1",
+    "isbn": "9788467045485"
 }
 
 ###
@@ -21,10 +21,30 @@ PUT http://localhost:3000/books/1
 Content-Type: application/json
 
 {
-    "name":"Estudio en escarlata",
-    "author": "Arthur Conan Doyle",
-    "isbn": "9789871269259"
+    "name": "Estudio en Escarlata",
+    "author_id": "1",
+    "isbn": "9788467045420"
 }
 
 ###
-DELETE http://localhost:3000/books/1
+DELETE http://localhost:3000/books/17
+
+//endpoints autores
+
+###
+PUT http://localhost:3000/authors/4
+Content-Type: application/json
+
+{
+    "author_name": "Jane Austen",
+    "author_country": "UK"
+}
+
+###
+POST http://localhost:3000/authors
+Content-Type: application/json
+
+{
+    "author_name": "Jane Austen",
+    "author_country": "UK"
+}
