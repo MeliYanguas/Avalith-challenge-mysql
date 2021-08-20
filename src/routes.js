@@ -6,7 +6,7 @@ const mysqlFields = 'id, name, author_id, isbn, id_author, author_name, author_c
 router.get('/books', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
-    // no poner el asterico si no los campos
+
     connection.query(`SELECT ${mysqlFields} FROM books INNER JOIN authors ON books.author_id = authors.id_author`, (err, rows) => {
       if (err) return res.status(500).send(err);
 
