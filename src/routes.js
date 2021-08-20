@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const mysqlFields = 'id, name, author_id, isbn, id_author, author_name, author_country';
+
 router.get('/books', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
-
-    connection.query('SELECT * FROM books INNER JOIN authors ON books.author_id = authors.id_author', (err, rows) => {
+    // no poner el asterico si no los campos
+    connection.query(`SELECT ${mysqlFields} FROM books INNER JOIN authors ON books.author_id = authors.id_author`, (err, rows) => {
       if (err) return res.status(500).send(err);
 
       const response = rows.map((book) => ({
@@ -28,7 +30,7 @@ router.get('/books/:id', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
 
-    connection.query('SELECT * FROM books INNER JOIN authors ON books.author_id = authors.id_author WHERE id = ?', [req.params.id], (err, rows) => {
+    connection.query(`SELECT ${mysqlFields} FROM books INNER JOIN authors ON books.author_id = authors.id_author WHERE id = ?`, [req.params.id], (err, rows) => {
       if (err) return res.status(500).send(err);
 
       const response = rows.map((book) => ({
@@ -55,7 +57,7 @@ router.post('/books', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
     connection.query('INSERT INTO books set ?', [req.body], (err, rows) => {
-      if (err) return res.status(400).send('No existe el id de autor');
+      if (err) return res.status(400).send(err);
 
       res.send('El libro ha sido registrado');
     });
@@ -93,7 +95,7 @@ router.get('/authors', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
 
-    connection.query('SELECT * FROM authors', (err, rows) => {
+    connection.query('SELECT id_author, author_name, author_country FROM authors', (err, rows) => {
       if (err) return res.status(500).send(err);
 
       res.json(rows);
@@ -105,7 +107,7 @@ router.get('/authors/:id', (req, res) => {
   req.getConnection((err, connection) => {
     if (err) return res.status(500).send(err);
 
-    connection.query('SELECT * FROM authors WHERE id_author = ?', [req.params.id], (err, rows) => {
+    connection.query('SELECT id_author, author_name, author_country FROM authors WHERE id_author = ?', [req.params.id], (err, rows) => {
       if (err) return res.status(500).send(err);
       res.json(rows[0]);
     });
